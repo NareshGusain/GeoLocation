@@ -2,6 +2,18 @@ import os
 import pandas as pd
 import re
 
+
+## This script was used to parse the txt files and create a dataset (.csv) 
+
+def remove_link_from_context(context):
+    # Regular expression pattern to match URLs
+    url_pattern = r'https?://\S+'
+    # Replace URLs with an empty string
+    cleaned_context = re.sub(url_pattern, '', context)
+    # Remove extra whitespaces
+    cleaned_context = ' '.join(cleaned_context.split())
+    return cleaned_context
+
 def extract_info_from_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         text = file.read()
@@ -40,8 +52,5 @@ def parse_folder(folder_path):
 folder_path = 'data'
 parsed_data = parse_folder(folder_path)
 
-# Create DataFrame
 df = pd.DataFrame(parsed_data)
-
-# Display DataFrame
 print(df)
