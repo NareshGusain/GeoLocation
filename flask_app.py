@@ -37,11 +37,6 @@ df['Locations'] = df['Locations'].apply(ast.literal_eval)
 nlp = spacy.load("en_core_web_sm")
 
 
-@app.route('/')
-@app.route('/home')
-def main():
-    return render_template('index.html')
-
 @app.route('/api/search', methods=['POST'])
 def search_locations():
     user_input = request.json['text']
